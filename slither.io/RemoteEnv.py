@@ -9,6 +9,8 @@ import random as rand
 import time
 import socket
 import pickle
+from webdriver_manager.chrome import ChromeDriverManager
+
 '''
 TCP_IP = '127.0.0.1'
 TCP_PORT = 5005
@@ -24,7 +26,8 @@ class RemoteEnv:
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-setuid-sandbox")
         options.add_argument("--disable-extensions")
-        self.driver = webdriver.Chrome(desired_capabilities=caps,chrome_options=options)
+        #self.driver = webdriver.Chrome(desired_capabilities=caps,chrome_options=options)
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(),desired_capabilities=caps,chrome_options=options)
         self.driver.maximize_window()
         tcpconnection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         tcpconnection.bind((tcp_ip, tcp_port))
